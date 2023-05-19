@@ -1,5 +1,7 @@
 # Rust
 
+Following this tutorial [link](https://www.youtube.com/watch?v=PpWR6zungUk&list=PLlrxD0HtieHjbTjrchBwOVks_sr8EVW1x&index=1)
+
 ## Chapter-1
 
 ### Compile rust code
@@ -53,3 +55,5 @@ const SCORE_LIMIT: u32 = 100;
 ```
 
 ## Chapter-3
+
+### Datatypes
