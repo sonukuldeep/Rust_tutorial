@@ -51,3 +51,5 @@ Example:-
 ```rs
 const SCORE_LIMIT: u32 = 100;
 ```
+
+## Chapter-3
