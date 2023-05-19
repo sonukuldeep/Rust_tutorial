@@ -76,3 +76,60 @@ Characters
 - Specified using char keyword
 - Use single quotes
 - Four bytes in size
+
+## Chapter-4
+
+### Compound datatypes
+
+Array
+- Continuous group of items
+- fixed length
+- Length known at compile time
+- homogeneous
+
+Syntax:-
+```rs
+let array: [u32; 3] = [1,2,3];
+
+let first_item = array[0];
+let will_warn = array[100]; // compiler will warn while at runtime it will crash
+```
+
+Tuples
+- Linear group of items
+- fixed length
+- length known at compile time
+- heterogenous
+- Empty tuple is called unit
+
+```rs
+let tuple: (bool, u16, u8) = (true, 2, 3);
+
+let first_item = tuple.0;
+let error = tuple.100; // will give error
+```
+
+## Chapter-5
+
+Function
+- Argument type is always required
+- Return type is required if value is returned
+- If no value is retured, return type is unit
+
+Syntax:-
+```rs
+fn function_name(argument: argumentType) -> returnType {
+    //body
+}
+```
+
+Example:-
+```rs
+fn change_to_upper_case(input: String) -> String {
+    let mut output = input.to_uppercase();
+    output.push('!');
+    output // mark missing semi-colon which tell the compiler to return this
+}
+
+let output = change_to_upper_case("Hello world");
+```
