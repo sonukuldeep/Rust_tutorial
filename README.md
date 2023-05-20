@@ -410,3 +410,21 @@ fn main() {
 - For Option type:
     - Returns a value is with the Some variant
     - Returns nothing for the None variant
+
+## Chapter-11
+Ownership
+Ownership is a set of rules that govern how a Rust program manages memory.
+Rust uses a third approach: memory is managed through a system of ownership with a set of rules that the compiler checks. If any of the rules are violated, the program won’t compile. None of the features of ownership will slow down your program while it’s running.
+- Related to how your program manages memory
+- Rust stores data in two differently structured parts of memory
+    - Stack
+    - Heap
+
+
+### Ownership Rules
+- Each value in Rust has an owner.
+- There can only be one owner at a time.
+- When the owner goes out of scope, the value will be dropped.
+
+Check docs for detailed explaination <br/>
+[docs](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
