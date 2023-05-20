@@ -268,3 +268,45 @@ match x {
     _ => println!("something else"),
 }
 ```
+
+## Chapter-9
+
+### loop
+It is used to execute over a blockof code forever. Or until it is stopped, or the program quits.
+
+syntax:- 
+```rs
+loop {
+    println!("I loop forever!");
+}
+```
+
+### break
+syntax:- 
+```rs
+loop {
+    println!("Stops when program hits break!");
+    break;
+}
+```
+
+### While loop
+syntax:- 
+```rs
+let mut number = 3;
+while number != 0 {
+    println!("{}", number);
+    number -= 1;
+}
+println!("End of while");
+```
+
+### for loop
+
+syntax:-
+```rs
+let a = [10, 20, 30, 40, 50];
+for element in a.iter() {
+    println!("The value is: {}", element);
+}
+```
