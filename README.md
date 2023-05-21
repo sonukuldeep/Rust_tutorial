@@ -432,7 +432,7 @@ In rust memory is managed through a system of ownership with a set of rules that
 - Memory on the heap needs to be manually deallocated to prevent memory leaks.
 - Heap memory access is generally slower than stack memory due to indirection and dynamic allocation overhead.
 
-
+## Chapter-12
 ### Ownership
 Ownership is a core concept in Rust that governs how memory is managed and ensures memory safety without the need for a garbage collector or runtime overhead. It revolves around the idea that every value in Rust has a single owner at any given time.
 
@@ -462,7 +462,7 @@ Rust's ownership model may seem strict at first, but it promotes clear ownership
 Check docs for detailed explaination <br/>
 [docs](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
 
-## Chapter-12
+## Chapter-13
 ### Borrowing
 Borrowing is a fundamental concept related to ownership and memory management. It ensures that multiple parts of a program can access and manipulate data without causing issues like data races or memory leaks.
 
@@ -516,5 +516,67 @@ fn main() {
 
     println!("Modified z: {}", z);
     println!("Modified w: {}", w);
+}
+```
+
+## Chapter-14
+### String
+Rust treats strings differently compared to other languages
+- Strings are represented by the String type which is part of the Rust standard library and provides methods for string manipulation and operations.
+- Rust strings are growable, meaning their length can change dynamically.
+- Strings are encoded as UTF-8, allowing for handling and manipulation of Unicode characters.
+- The String type is heap-allocated, meaning the memory for the string content is dynamically allocated on the heap.
+- Rust provides seamless conversion between string slices (&str) and owned strings (String).
+- String manipulation methods like concatenation, appending, slicing, replacing, and more are available for working with strings.
+
+Creating a new String can be done using the String::new() function, which returns an empty string. You can also create a String from a string literal using the to_string() method or the String::from() function:
+```rs
+let empty_string = String::new();
+let hello = "Hello, ".to_string();
+let world = String::from("world!");
+```
+
+The String type supports concatenation using the + operator or the String::push_str() method:
+```rs
+let hello = "Hello".to_string();
+let world = "world!";
+let hello_world = hello + " " + world;
+
+let mut message = String::from("Hello, ");
+let name = "Alice";
+
+message.push_str(name);
+
+println!("{}", message); // Output: Hello, Alice
+```
+
+Additionally, you can use the format!() macro to concatenate multiple values into a String:
+```rs
+let name = "Alice";
+let age = 25;
+let message = format!("My name is {} and I am {} years old.", name, age);
+```
+
+Rust's String type provides many other useful methods for manipulating and working with strings, such as indexing, slicing, replacing, splitting, and more. You can explore these methods in the Rust documentation or by using Rust's built-in documentation tool (rustup doc or cargo doc).
+
+It's important to note that Rust distinguishes between string slices (&str) and owned strings (String). String slices are borrowed references to string data, and they can be used for efficient string manipulation when ownership is not required. Rust provides seamless conversion between string slices and String using the &str and String types' respective as_str() and into() methods.
+
+```rs
+fn print_string_length(string: &str) {
+    println!("Length of the string: {}", string.len());
+}
+
+fn main() {
+    // Converting String to &str
+    let owned_string = String::from("Hello, Rust!");
+    let borrowed_string: &str = owned_string.as_str();
+
+    print_string_length(borrowed_string);
+
+    // Converting &str to String
+    let borrowed_string = "Hello, Rust!";
+    let owned_string: String = borrowed_string.to_string();
+
+    println!("New owned string: {}", owned_string);
 }
 ```
