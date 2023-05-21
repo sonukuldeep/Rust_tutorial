@@ -56,22 +56,22 @@ const SCORE_LIMIT: u32 = 100;
 
 ### Datatypes
 
-Integers
+1. Integers
 - Integers are whole numbers
 - They are either signed or unsigned
 - Rust defaults to i32 which is the fastest
 
-Floating
+2. Floating
 - Numbers with decimals
 - f32 and f64 are two tyes
 - default is f64
 
-Boolean
+3. Boolean
 - Have a value of either true or false
 - specified using keyword bool
 - one byte in size
 
-Characters
+4. Characters
 - Represent letters
 - Specified using char keyword
 - Use single quotes
@@ -81,7 +81,7 @@ Characters
 
 ### Compound datatypes
 
-Array
+1. Array
 - Continuous group of items
 - fixed length
 - Length known at compile time
@@ -95,7 +95,7 @@ let first_item = array[0];
 let will_warn = array[100]; // compiler will warn while at runtime it will crash
 ```
 
-Tuples
+2. Tuples
 - Linear group of items
 - fixed length
 - length known at compile time
@@ -111,7 +111,7 @@ let error = tuple.100; // will give error
 
 ## Chapter-5
 
-Function
+### Function
 - Argument type is always required
 - Return type is required if value is returned
 - If no value is retured, return type is unit
@@ -147,15 +147,15 @@ Use the keyword struct followed by a name in order to create a struct
     - Tuple
     - Unit
 
-Classic structs
+1. Classic structs
 - Most commonly used
 - Each field has a name and a type
 
-Tuple
+2. Tuple
 - Similar to classic structs
 - Their fields have no names
 
-Uint structs
+3. Unit structs
 - Have no field
 - Similar to the () unit type
 
@@ -218,7 +218,9 @@ let west = CardinalDirections::West(String::from("West"));
 
 ## Chapter-8
 
-### If
+### Conditionals
+
+1. If
 syntax: 
 ```rs
 let price = 10;
@@ -227,7 +229,7 @@ if price > 0 {
 }
 ```
 
-### If else 
+2. If else 
 syntax: 
 ```rs
 let price = 10;
@@ -238,7 +240,7 @@ if(price > 0) {
 }
 ```
 
-### If else if
+3. If else if
 syntax: 
 ```rs
 let price = 10;
@@ -251,7 +253,7 @@ if(price > 0) {
 }
 ```
 
-### Match
+4. Match
 - Rust provides pattern matching with the match keyword
 - A scrutinee expression is provided to compare to the patterns.
 - Arms are evaluated and compared with the scrutinee expression
@@ -272,6 +274,7 @@ match x {
 ## Chapter-9
 
 ### loop
+1. loop
 It is used to execute over a blockof code forever. Or until it is stopped, or the program quits.
 
 syntax:- 
@@ -281,7 +284,7 @@ loop {
 }
 ```
 
-### break
+2. break
 syntax:- 
 ```rs
 loop {
@@ -290,7 +293,7 @@ loop {
 }
 ```
 
-### While loop
+3. While loop
 syntax:- 
 ```rs
 let mut number = 3;
@@ -301,8 +304,7 @@ while number != 0 {
 println!("End of while");
 ```
 
-### for loop
-
+4. for loop
 syntax:-
 ```rs
 let a = [10, 20, 30, 40, 50];
@@ -318,7 +320,7 @@ for element in a.iter() {
 - Option
 - Result
 
-#### Panic
+1. Panic
 Simplest way to handle errors
 
 What happens when a panic is
@@ -338,7 +340,7 @@ let v = vec![0, 1, 2, 3];
 println!("{}", v[6]); // This will cause a panic
 ```
 
-#### Option enum
+2. Option enum
 - Manages the possibility of
 none existent values
 - Type T is generic and
@@ -357,7 +359,7 @@ enum Option<T> {
 }
 ```
 
-#### Result enum
+3. Result enum
 - Used for input/output operations (I/O)
     - Parsing strings
     - File access
