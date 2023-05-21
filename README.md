@@ -412,19 +412,109 @@ fn main() {
     - Returns nothing for the None variant
 
 ## Chapter-11
-Ownership
-Ownership is a set of rules that govern how a Rust program manages memory.
-Rust uses a third approach: memory is managed through a system of ownership with a set of rules that the compiler checks. If any of the rules are violated, the program won’t compile. None of the features of ownership will slow down your program while it’s running.
-- Related to how your program manages memory
+### Memory
+In rust memory is managed through a system of ownership with a set of rules that the compiler checks. If any of the rules are violated, the program won’t compile. None of the features of ownership will slow down your program while it’s running.
+
 - Rust stores data in two differently structured parts of memory
-    - Stack
-    - Heap
+1. Stack:
+- The stack is a region of memory that is used for storing local variables and function call information.
+- It operates on a Last-In, First-Out (LIFO) principle.
+- Stack memory allocation and deallocation are managed automatically by the compiler.
+- Stack allocations have a fixed size known at compile time.
+- The lifetime of stack-allocated variables is determined by the scope in which they are defined.
+- Stack memory is generally faster to allocate and deallocate than heap memory.
+
+2. Heap:
+- The heap is a region of memory used for dynamic memory allocation.
+- It allows for the allocation of memory whose size is not known at compile time or that needs to outlive the scope it was created in.
+- Heap memory allocation and deallocation are managed explicitly by the programmer.
+- Heap allocations have a dynamic size and are requested using functions like Box::new(), Vec::new(), or via system APIs.
+- Memory on the heap needs to be manually deallocated to prevent memory leaks.
+- Heap memory access is generally slower than stack memory due to indirection and dynamic allocation overhead.
 
 
-### Ownership Rules
-- Each value in Rust has an owner.
-- There can only be one owner at a time.
-- When the owner goes out of scope, the value will be dropped.
+### Ownership
+Ownership is a core concept in Rust that governs how memory is managed and ensures memory safety without the need for a garbage collector or runtime overhead. It revolves around the idea that every value in Rust has a single owner at any given time.
+
+When you create a value in Rust, such as a variable or an object, you become its owner. As an owner, you have full control over that value and its associated memory. Ownership comes with three fundamental rules:
+
+1. Unique Ownership:
+- Each value in Rust has a unique owner, and there can only be one owner at a time.
+- The owner is responsible for the memory deallocation when the value goes out of scope.
+- When the owner goes out of scope, the value is dropped, and its memory is automatically freed.
+
+2. Move Semantics:
+- Ownership in Rust follows the move semantics by default.
+- When a value is assigned to another variable or passed as a function argument, the ownership is transferred.
+- The original owner loses its ownership, and the new owner takes control of the value.
+- This prevents multiple variables from accidentally accessing and modifying the same value, reducing bugs and data races.
+
+3. Borrowing and References:
+- To allow temporary access to a value without transferring ownership, you can use borrowing and references.
+- Borrowing enables you to lend a reference to a value to another part of your code.
+- References come in two forms: immutable references (&T) and mutable references (&mut T).
+- Borrowing enforces strict rules at compile-time to prevent data races, dangling references, and use-after-free errors.
+
+These ownership rules enable the Rust compiler to perform static analysis and memory management at compile time. It ensures that values are dropped when they are no longer needed and prevents common issues like memory leaks and use-after-free bugs. The ownership system allows Rust to provide memory safety and concurrency guarantees without the need for manual memory management or garbage collection.
+
+Rust's ownership model may seem strict at first, but it promotes clear ownership semantics, eliminates many runtime errors, and guarantees thread safety without sacrificing performance. It enables you to write robust, efficient, and safe code in a systems programming language.
 
 Check docs for detailed explaination <br/>
 [docs](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
+
+## Chapter-12
+### Borrowing
+Borrowing is a fundamental concept related to ownership and memory management. It ensures that multiple parts of a program can access and manipulate data without causing issues like data races or memory leaks.
+
+When you create a variable in Rust, you become its owner, meaning you have exclusive control over that variable and its memory. However, sometimes you need to temporarily share that variable with other parts of your code without transferring ownership. This is where borrowing comes into play.
+
+Borrowing allows you to lend a reference to a variable or data structure to another part of your code, called the borrower, without giving up ownership. There are two types of borrowing in Rust: mutable borrowing and immutable borrowing.
+
+1. Immutable Borrowing (Shared Reference):
+- When you borrow a variable with an immutable borrow, you can read its value but cannot modify it.
+- Immutable borrows are denoted using the & symbol. For example, &x borrows the variable x immutably.
+- Multiple immutable borrows can exist simultaneously, allowing multiple parts of your code to read the data.
+- The borrower can hold the reference for as long as it needs, but it cannot outlive the owner's lifetime.
+
+2. Mutable Borrowing (Exclusive Reference):
+- When you need to modify a borrowed variable, you use a mutable borrow.
+- Mutable borrows are denoted using the &mut symbol. For example, &mut y borrows the variable y mutably.
+- Rust enforces strict rules with mutable borrows. Only one mutable borrow can exist at a time for a specific piece of data within a given scope.
+- Mutable borrows prevent simultaneous access to the data to avoid data races.
+- The borrower can hold the mutable reference for as long as it needs, but it cannot outlive the owner's lifetime.
+
+The Rust compiler statically analyzes your code to ensure that borrows adhere to these rules at compile time. This analysis prevents common issues like use-after-free errors, data races, and dangling references, which are typically found in languages with manual memory management.
+
+Borrowing, combined with ownership, allows Rust to achieve memory safety without relying on a garbage collector or runtime overhead. It enables you to write efficient and safe code by enforcing strict rules around the ownership and usage of variables and data structures.<br/>
+Check detailed Doc on borowwing [Doc](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
+
+Example:-
+```rs
+fn main() {
+    // Immutable borrowing example
+    let x = 5; // Original value
+
+    // Borrowing x immutably with an immutable reference
+    let y = &x;
+
+    println!("x: {}", x);
+    println!("y: {}", y);
+
+    // Uncommenting the line below will result in a compilation error
+    // x = 10; // Error: Cannot assign to `x` because it is borrowed
+
+    // Mutable borrowing example
+    let mut z = 10; // Original mutable value
+
+    // Borrowing z mutably with a mutable reference
+    let w = &mut z;
+
+    println!("z: {}", z);
+    println!("w: {}", w);
+
+    *w += 5; // Modifying the value through the mutable reference
+
+    println!("Modified z: {}", z);
+    println!("Modified w: {}", w);
+}
+```
