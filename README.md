@@ -9,9 +9,9 @@ Rust by Example (RBE) is a collection of runnable examples that illustrate vario
 
 ## Topics that will be covered
 - [x] Hello World - Start with a traditional Hello World program.
-- [ ] Primitives - Learn about signed integers, unsigned integers and other primitives.
+- [x] Primitives - Learn about signed integers, unsigned integers and other primitives.
 - [ ] Custom Types - struct and enum.
-- [ ] Variable Bindings - mutable bindings, scope, shadowing.
+- [x] Variable Bindings - mutable bindings, scope, shadowing.
 - [ ] Types - Learn about changing and defining types.
 - [ ] Conversion
 - [ ] Expressions
